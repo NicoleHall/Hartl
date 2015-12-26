@@ -7,9 +7,9 @@ class UsersControllerTest < ActionController::TestCase
   end
 
   test "should get signup" do
-    get :signup
+    get :new
     assert_response :success
-    assert_select "title", "Ruby on Rails Tutorial Sample App"
+    assert_select "title", "Sign up | Ruby on Rails Tutorial Sample App"
 
 
   end
