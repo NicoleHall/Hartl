@@ -13,15 +13,15 @@ class UsersSignupTest < ActionDispatch::IntegrationTest
     assert_template 'users/new'
   end
 
-  test "A valid user is added to the databas" do
-    before_count = User.all.count
+  test "valid signup information" do
     get signup_path
-    post users_path, user: { name:  "nicole hall",
-                             email: "user@valid.gmail.com",
-                              password:              "password",
-                              password_confirmation: "password" }
-    after_count = User.all.count
-    assert_equal 0, before_count
-    assert_equal 1, after_count
+    assert_difference 'User.count', 1 do
+      post_via_redirect users_path, user: { name:  "Example User",
+                                            email: "user@example.com",
+                                            password:              "password",
+                                            password_confirmation: "password" }
+    end
+    assert_template 'users/show'
+    assert_equal true, is_logged_in?
   end
 end
